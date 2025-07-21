@@ -1,0 +1,7 @@
+matplotlib==3.10.3
+numpy==2.3.1
+pandas==2.3.1
+python-dateutil==2.9.0.post0
+requests==2.32.4
+yfinance==0.2.65
+jupyter==1.1.1
