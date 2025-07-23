@@ -11,11 +11,11 @@ def optimizer(simulation_data):
     """
     import numpy as np
     
-    simulations = 10000
+    n_simulations = 10000
     
     lowest_volatility = np.inf
     highest_sharpe_ratio = -np.inf
-    for i in range(simulations):
+    for i in range(n_simulations):
         annualized_volatility = simulation_data[i][1]
         sharpe_ratio = simulation_data[i][2]
         

@@ -12,9 +12,9 @@ def main():
 
     close_prices = gather_data(universe = universe, start_date = start_date, end_date = end_date)
     annualized_avg_returns, annualized_cov_matrix = asset_statistics(close_prices = close_prices)
-    simulations_list, weightings_list = simulations(annualized_avg_daily_return = annualized_avg_returns, annualized_cov_matrix = annualized_cov_matrix)
-    highest_sharpe_ratio_index, lowest_volatility_index  = optimizer(simulation_data = simulations_list)
-    lowest_volatility_weightings, highest_sharpe_ratio_weightings  = plot(weightings_list = weightings_list, simulations_results = simulations_list, lowest_volatility_index = lowest_volatility_index, highest_sharpe_ratio_index = highest_sharpe_ratio_index)
+    simulation_data_list, simulation_weightings_list = simulations(annualized_avg_daily_return = annualized_avg_returns, annualized_cov_matrix = annualized_cov_matrix)
+    highest_sharpe_ratio_index, lowest_volatility_index  = optimizer(simulation_data = simulation_data_list)
+    lowest_volatility_weightings, highest_sharpe_ratio_weightings  = plot(simulation_weightings_list = simulation_weightings_list, simulation_data_list = simulation_data_list, lowest_volatility_index = lowest_volatility_index, highest_sharpe_ratio_index = highest_sharpe_ratio_index)
     
     print('REPORT:')
     print(f"Lowest Volatility Weightings: {lowest_volatility_weightings}")

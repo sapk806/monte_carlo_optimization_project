@@ -16,12 +16,12 @@ def simulations(annualized_avg_daily_return, annualized_cov_matrix):
     simulations = 10000
     n_assets = 12
 
-    simulations_list = []
-    weightings_list = []
+    simulation_data_list = []
+    simulation_weightings_list = []
     for i in range(simulations):
         weightings = np.random.random(n_assets)
         weightings = weightings/sum(weightings)
-        weightings_list.append(weightings)
+        simulation_weightings_list.append(weightings)
 
         avg_daily_return_dict = {}
         for asset, weighting in zip(annualized_avg_daily_return.index, weightings):
@@ -34,9 +34,9 @@ def simulations(annualized_avg_daily_return, annualized_cov_matrix):
 
         sharpe_ratio = annualized_portfolio_avg_daily_return / annualized_portfolio_volatility
         
-        simulations_list.append((annualized_portfolio_avg_daily_return, annualized_portfolio_volatility, sharpe_ratio, weightings))
+        simulation_data_list.append((annualized_portfolio_avg_daily_return, annualized_portfolio_volatility, sharpe_ratio, weightings))
     
-    simulations_series = pd.Series(simulations_list)
+    simulations_series = pd.Series(simulation_data_list)
     simulations_series.to_csv('results/simulations.csv')
 
-    return(simulations_list, weightings_list)
+    return(simulation_data_list, simulation_weightings_list)

@@ -1,4 +1,4 @@
-def plot(weightings_list, simulations_results, lowest_volatility_index, highest_sharpe_ratio_index):
+def plot(simulation_weightings_list, simulation_data_list, lowest_volatility_index, highest_sharpe_ratio_index):
     """
     Plots the volatilities of the simulations vs. average returns of the simulations wioth the drawdown when the maximum is higher than the simulation's return.
 
@@ -21,23 +21,23 @@ def plot(weightings_list, simulations_results, lowest_volatility_index, highest_
 
     
     for i in range(simulations):
-        avg_return = simulations_results[i][0]
+        avg_return = simulation_data_list[i][0]
         avg_returns.append(avg_return)
 
-        volatility = simulations_results[i][1]
+        volatility = simulation_data_list[i][1]
         volatilities.append(volatility)
 
-        sharpe_ratio = simulations_results[i][2]
+        sharpe_ratio = simulation_data_list[i][2]
         sharpe_ratios.append(sharpe_ratio)
 
     
-    highest_sharpe_ratio_avg_return = simulations_results[highest_sharpe_ratio_index][0]
-    highest_sharpe_ratio_volatility = simulations_results[highest_sharpe_ratio_index][1]
-    highest_sharpe_ratio_weightings = weightings_list[highest_sharpe_ratio_index]
+    highest_sharpe_ratio_avg_return = simulation_data_list[highest_sharpe_ratio_index][0]
+    highest_sharpe_ratio_volatility = simulation_data_list[highest_sharpe_ratio_index][1]
+    highest_sharpe_ratio_weightings = simulation_weightings_list[highest_sharpe_ratio_index]
 
-    lowest_volatility = simulations_results[int(lowest_volatility_index)][1]
-    lowest_volatility_avg_return = simulations_results[int(lowest_volatility_index)][0]
-    lowest_volatility_weightings = weightings_list[int(lowest_volatility_index)]
+    lowest_volatility = simulation_data_list[int(lowest_volatility_index)][1]
+    lowest_volatility_avg_return = simulation_data_list[int(lowest_volatility_index)][0]
+    lowest_volatility_weightings = simulation_weightings_list[int(lowest_volatility_index)]
 
     plt.figure(figsize = (12, 6))
     plt.scatter(volatilities, avg_returns, c = sharpe_ratios)
