@@ -1,17 +1,21 @@
-def plot(simulation_weightings_list, simulation_data_list, lowest_volatility_index, highest_sharpe_ratio_index):
-    """
-    Plots the volatilities of the simulations vs. average returns of the simulations wioth the drawdown when the maximum is higher than the simulation's return.
+import matplotlib.pyplot as plt
+import numpy as np
 
-    Parameters:
-        weightings_list (list of list): A list of all of the weightings used in the simulations
-        simulations_results (list): A list containing the return, standard deviation, Sharpe ratio, and weightings of the portfolio in the current simulation.
-        lowest_volatility_index (int): The index position of the simulation with the lowest volatility.
-        highest_sharpe_ratio_index (int): The index position of the simulation with the highest sharpe ratio.
+def plot(simulation_weightings_list: list, simulation_data_list: list, lowest_volatility_index: int, highest_sharpe_ratio_index: int):
+    """
+    Plots the efficient frontier from 10,000 Monte Carlo portfolio simulations.
+    Plot is saved to 'plots/efficient_frontier.png'
+
+    Args:
+        simulation_weightings_list (list[np.ndarray]): List of all of the weightings used in the simulations
+        simulation_data_results (list[tuple[float, float, float, np.ndarray]]): List containing the return, standard deviation, Sharpe ratio, and weightings of the portfolio in the current simulation.
+        lowest_volatility_index (int): Index of the simulation with the lowest volatility.
+        highest_sharpe_ratio_index (int): Index of the simulation with the highest Sharpe ratio.
     
     Returns:
-        None
+        np.ndarray: Weights of the portfolio with the lowest volatility.
+        np.ndarray: Weights of the portfolio with the highest Sharpe ratio.
     """
-    import matplotlib.pyplot as plt
 
     simulations = 10000
 

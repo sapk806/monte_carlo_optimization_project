@@ -1,16 +1,18 @@
-def asset_statistics(close_prices):
-    """
-    Gathers the daily returns and annualizes them, and finds the annualized covariance matrix of the daily returns.
+import pandas as pd
+import numpy as np
 
-    Parameters:
-        close_price (pd.DataFrame): A DataFrame consisting of the adjusted close prices of each asset, indexed by date with assets as columns.
+def asset_statistics(close_prices: pd.DataFrame):
+    '''
+    Calculates the daily returns and annualizes them, and finds the annualized covariance matrix of the daily returns.
+    Saves daily returns to 'results/daily_returns.csv'.
+    
+    Args:
+        close_prices (pd.DataFrame): DataFrame consisting of the adjusted close prices of each asset, indexed by date with assets as columns.
     
     Returns:
-        pd.DataFrame: A DataFrame consisting of the average annualized daily returns of each asset, indexed by date with assets as columns.
-        np.ndarray: An array representing the covariance matrix of the daily returns of each asset.
-    """
-    import pandas as pd
-    import numpy as np
+        pd.Series: Annualized average returns for each asset (indexed by ticker).
+        pd.DataFrame: Annualized covariance matrix of asset returns (tickers as both rows and columns).
+    '''
 
     daily_returns = close_prices.pct_change().dropna(how = 'all') 
     annualized_avg_daily_returns = daily_returns.mean() * 252

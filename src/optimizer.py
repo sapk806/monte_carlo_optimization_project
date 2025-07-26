@@ -1,15 +1,20 @@
-def optimizer(simulation_data):
+import numpy as np
+
+def optimizer(simulation_data: list[tuple]):
     """
     Finds the simulation with the lowest volatility and highest sharpe ratio, and takes the position in the simiulations list of those simulations.
 
-    Parameters:
-        simulation_data(list): A list containing the return, standard deviation, Sharpe ratio, and weightings of the portfolio in the current simulation.
-    
+    Args:
+        simulation_data(list): List of tuples containing:
+            - float: Simulated portfolio return
+            - float: Simulated portfolio volatility
+            - float: Sharpe ratio
+            - np.ndarray: Portfolio weightings
+ 
     Returns:
-        int: The index position of the simulation with the highest sharpe ratio.
-        int: The index position of the simulation with the lowest volatility.
+        int: Index of the simulation with the highest sharpe ratio.
+        int: Index of the simulation with the lowest volatility.
     """
-    import numpy as np
     
     n_simulations = 10000
     

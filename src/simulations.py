@@ -1,17 +1,26 @@
-def simulations(annualized_avg_daily_return, annualized_cov_matrix):
-    """
-    Runs 10,000 simulations using different weightings for each asset to calculate the portfolio value in combination with the annualized average daily return and the annualized covariance matrix.
+import pandas as pd
+import numpy as np
 
-    Parameters
-        annualized_avg_daily_return (pd.DataFrame): A DataFrame consisting of the average annualized daily returns of each asset, indexed by date with assets as columns.
-        annualized_cov_matrix (np.ndarray): An array representing the covariance matrix of the daily returns of each asset.
+def simulations(annualized_avg_daily_return: pd.Series, annualized_cov_matrix: pd.DataFrame):
+    '''
+    Runs 10,000 Monte Carlo simulations using randomly generated portfolio weightings.
+    For each simulation, computes expected return, volatility, and Sharpe raito based on the
+    provided annulized average returns and covariance matrix.
+
+    Saves simulation results to 'results/simulations.csv'
+
+    Args:
+        annualized_avg_daily_return (pd.DataFrame): DataFrame consisting of the average annualized daily returns of each asset, indexed by date with assets as columns.
+        annualized_cov_matrix (pd.DataFrame): pd.DataFrame: Annualized covariance matrix of asset returns (tickers as both rows and columns).
 
     Returns:
-        list: A list containing the return, standard deviation, Sharpe ratio, and weightings of the portfolio in the current simulation.
-        list of list: A list of all of the weightings used in the simulations.
-    """
-    import pandas as pd
-    import numpy as np
+        list[tuple]: List of tuples containing:
+            - float: Simulated portfolio return
+            - float: Simulated portfolio volatility
+            - float: Sharpe ratio
+            - np.ndarray: Portfolio weightings
+        np.ndarray: All weight vectors used in the simulations.
+    '''
     
     simulations = 10000
     n_assets = 12
